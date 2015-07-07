@@ -1,0 +1,11 @@
+<!-- Author: Enrico Murru (http://enree.co) 
+	Source: https://github.com/enreeco/lightning-progressbar
+-->
+<aura:event type="APPLICATION" description="Inbound event to guide the progress bar" >
+    <aura:attribute name="value" type="Integer" default="" 
+                    description="Value of the event"/>
+    <aura:attribute name="name" required="true" type="String" 
+                    description="Progress bar name"/>
+	<aura:attribute name="action" required="true" type="String" 
+                    description="Progress bar action"/>
+</aura:event>
