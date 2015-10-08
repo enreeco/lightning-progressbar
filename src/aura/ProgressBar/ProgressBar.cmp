@@ -1,42 +1,45 @@
 <!-- Author: Enrico Murru (http://enree.co) 
-	Source: https://github.com/enreeco/lightning-progressbar
+    Source: https://github.com/enreeco/lightning-progressbar
 -->
-<aura:component >
-	<ltng:require scripts="/resource/BootstrapSF1/js/jquery-2.1.1.min.js,
-             /resource/BootstrapSF1/bootstrap320/js/bootstrap.min.js,
-             /resource/BootstrapProgressbar/bootstrap-progressbar.min.js"
-        styles="/resource/BootstrapSF1/bootstrap320/css/bootstrap.min.css,
-                /resource/BootstrapProgressbar/bootstrap-progressbar.min.css"
+<aura:component>
+	<ltng:require 
+		scripts="
+			/resource/BootstrapSF1/js/jquery-2.1.1.min.js,
+        	/resource/BootstrapSF1/bootstrap320/js/bootstrap.min.js,
+            /resource/BootstrapProgressbar/bootstrap-progressbar.min.js"
+        styles="
+        	/resource/BootstrapSF1/bootstrap320/css/bootstrap.min.css,
+            /resource/BootstrapProgressbar/bootstrap-progressbar.min.css"
     	afterScriptsLoaded="{!c.onInit}"/>
+
     <aura:handler event="c:ProgressBarActionEvt" action="{!c.handleEvent}" />
     <aura:registerEvent name="progressBarMsgEvt" type="c:ProgressBarMessageEvt"/>
     
     <aura:attribute name="name" required="true" type="String" 
-                    description="Name of the progressbar: allows more than on component per app" />
+    	description="Name of the progressbar: allows more than on component per app" />
     <aura:attribute name="value" required="true" type="Integer" 
-                    description="Current bar value" />
-    
+        description="Current bar value" />
     <aura:attribute name="valueMin" type="Integer" 
-                    description="Min value, default 0" default="0"/>
+        description="Min value, default 0" default="0"/>
     <aura:attribute name="valueMax" type="Integer" 
-                    description="Max value, default 100" default="100"/>
-    
+        description="Max value, default 100" default="100"/>
     <aura:attribute name="usePercentage" type="Boolean" 
-                    description="Shows the % text or value/max" default="true"/>
+        description="Shows the % text or value/max" default="true"/>
     <aura:attribute name="displayText" type="String" 
-                    description="Leave blank for no text, 'center' to show % on center of the bar, 'fill' to show % on center of the filled part" />
+        description="Leave blank for no text, 'center' to show % on center of the bar, 'fill' to show % on center of the filled part" />
     <aura:attribute name="transitionDelay" type="Integer" 
-                    description="Milliseconds till the transition animation starts" />
+        description="Milliseconds till the transition animation starts" />
 	<aura:attribute name="barContainerClass" type="String" default=""
-                    description="Classes for the bar container" />
+        description="Classes for the bar container" />
 	<aura:attribute name="barClass" type="String" default=""
-                    description="Classes for the bar" />
+        description="Classes for the bar" />
     
-    <div class="{!'progress '+v.barContainerClass}">
-        <div id="{!globalId+'_progbar'}" class="{!'progress-bar '+v.barClass}" 
+    <div class="{!'progress ' + v.barContainerClass}">
+        <div aura:id="progbar" class="{!'progress-bar ' + v.barClass}" 
              role="progressbar" 
              data-transitiongoal="{!v.value}"
              aria-valuemin="{!v.valueMin}"
-             aria-valuemax="{!v.valueMax}"></div>
+             aria-valuemax="{!v.valueMax}">
+        </div>
     </div>
 </aura:component>
