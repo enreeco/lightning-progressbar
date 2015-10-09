@@ -1,9 +1,6 @@
-/* Author: Enrico Murru (http://enree.co) 
- *	Source: https://github.com/enreeco/lightning-progressbar
- */
 ({
     onInit : function(component, event, helper) {
-        $("[id='"+component.getGlobalId()+"_progbar']")
+    	$(component.find("progbar").getElement())
         .progressbar({
             display_text: 'center',
             transition_delay: component.get('v.transitionDelay'),
@@ -12,6 +9,9 @@
             use_percentage: component.get('v.usePercentage'),
             done : function(cmp){
                 $A.run(function(){
+                	var x = component.get("v.value");
+                	var y = component.get("v.valueMax");
+                	var z = component.get("v.valueMin");
                     if(component.get("v.value") >= component.get("v.valueMax")){
                         var evt = $A.get("e.c:ProgressBarMessageEvt");
                         evt.setParams({
@@ -43,14 +43,20 @@
         var targetIncrement = event.getParam("value");
         var action = event.getParam("action");
         var value = component.get("v.value");
-        if(action === 'Decrement') value -= targetIncrement;
-        else if(action === 'Increment') value += targetIncrement;
-        else if(action === 'FullFill') value = component.get("v.valueMax");
-        else if(action === 'Reset') value = component.get("v.valueMin");
-        else if(action === 'SetValue') value = targetIncrement;
+        
+        if (action === 'Decrement') {
+        	value -= targetIncrement;
+        } else if(action === 'Increment') {
+        	value += targetIncrement;
+        } else if(action === 'FullFill') {
+        	value = component.get("v.valueMax");
+        } else if(action === 'Reset') {
+        	value = component.get("v.valueMin");
+        } else if(action === 'SetValue') {
+        	value = targetIncrement;
+		}
 
-        var pb = $("[id='"+component.getGlobalId()+"_progbar']");
-
+        var pb = $(component.find("progbar").getElement());
         if(value < component.get("v.valueMin")){
             value = component.get("v.valueMin");
         }
@@ -61,4 +67,5 @@
         pb.attr("data-transitiongoal",value).progressbar();
         
     },
+
 })

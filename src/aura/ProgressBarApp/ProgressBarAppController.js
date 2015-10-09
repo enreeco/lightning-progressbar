@@ -1,6 +1,3 @@
-/* Author: Enrico Murru (http://enree.co) 
- *	Source: https://github.com/enreeco/lightning-progressbar
- */
 ({
 	increment10_p1 : function(component, event, helper) {
         helper.sendMessage("Increment","pb1",10);
@@ -29,7 +26,6 @@
     handleProgressBarEvent  : function(component, event, helper){
         var originName = event.getParam("name");
         var message =  event.getParam("message");
-        document.getElementById(component.getGlobalId()+'_msg')
-        		.innerHTML = message+" event for progress bar named '"+originName+"' at "+(new Date()).toLocaleString();
+        component.set("v.message", message + " event for progress bar named '" + originName + "' at " + (new Date()).toLocaleString());
     },
 })
